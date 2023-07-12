@@ -4,16 +4,18 @@ import { styled } from 'styled-components';
 
 const StyledCard = styled.div`
     width: 350px;
-    height: 500px;
+    height: 350px;
     display:flex;
     flex-direction:column;
     gap:10px;
 `
 const ContainerImg = styled.div`
     width:100%;
+    height:70%;
 `
 const StyledImg = styled.img`
     width:100%;
+    height:100%;
     border-radius:30px;
 `
 const InfoPrincipal = styled.div`
@@ -43,27 +45,47 @@ const DescripcionA = styled(DescripcionP)`
     color:black;
     font-weight:900;
 `
-const Card = () => {
-    return(
-        <StyledCard>
-            <ContainerImg>
-                <StyledImg src="https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2255&q=80" alt="Imagen"/>
-            </ContainerImg>
-            <InfoPrincipal>
-                <Info>
-                    <SuperHost>Super Host</SuperHost>
-                    <DescripcionP>Entire apartment, 2 beds</DescripcionP>
-                </Info>
-                <Puntuacion>
-                    <StarIcon sx={{color:colorResaltado}}/>
-                    <span>5</span>
-                </Puntuacion>
-            </InfoPrincipal>
-            <DescripcionA>Stylist apartment in center of the city</DescripcionA>
-
-        </StyledCard>
-
-    )
+const Card = (props) => {
+    const {photo,superHost,title,rating,beds,type}= props
+    if(superHost){
+        return(
+            <StyledCard>
+                <ContainerImg>
+                    <StyledImg src={photo}/>
+                </ContainerImg>
+                <InfoPrincipal>
+                    <Info>
+                        <SuperHost>Super Host</SuperHost>
+                        <DescripcionP>{type}, {beds} beds</DescripcionP>
+                    </Info>
+                    <Puntuacion>
+                        <StarIcon sx={{color:colorResaltado}}/>
+                        <span>{rating}</span>
+                    </Puntuacion>
+                </InfoPrincipal>
+                <DescripcionA>{title}</DescripcionA>
+            </StyledCard>
+        )
+    } else {
+        return(
+            <StyledCard>
+                <ContainerImg>
+                    <StyledImg src={photo}/>
+                </ContainerImg>
+                <InfoPrincipal>
+                    <Info>
+                        <DescripcionP>{type}, {beds} beds</DescripcionP>
+                    </Info>
+                    <Puntuacion>
+                        <StarIcon sx={{color:colorResaltado}}/>
+                        <span>{rating}</span>
+                    </Puntuacion>
+                </InfoPrincipal>
+                <DescripcionA>{title}</DescripcionA>
+            </StyledCard>
+        )
+    }
+    
 }
 
 export default Card
