@@ -30,8 +30,7 @@ const Container = () =>{
             setHouses(response)
         })
     },[])
-    const showHouses = [ListHouses[0],ListHouses[1],ListHouses[2],ListHouses[3],ListHouses[4],ListHouses[5]]
-    console.log(showHouses)
+    const showHouses = ListHouses.filter(house => house.city === "Helsinki")
     return(
         <Fragment>
             <StyledDiv>

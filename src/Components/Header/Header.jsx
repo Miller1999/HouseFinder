@@ -1,8 +1,13 @@
 import styled from "styled-components"
 import Logo from "../../assets/logo.png"
 import SearchIcon from '@mui/icons-material/Search';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Fragment, useState } from "react";
+import { colorResaltado } from "../../Global";
 
-const StyledHeader = styled.nav`
+const cities = ["Helsinki","Turku","Vaasa","Oulu"]
+
+const StyledHeader = styled.header`
     margin:0px 0px 30px 0px;
     display:flex;
     justify-content:space-between;
@@ -36,6 +41,7 @@ const PDiv = styled.div`
     justify-content:center;
     align-items:center;
 `
+
 const StyledButton = styled.button`
     display:flex;
     align-items:center;
@@ -43,29 +49,86 @@ const StyledButton = styled.button`
     background-color: transparent;
     border:none;
     padding:0;
+    cursor:pointer;
 `
 const CenterDiv = styled(PDiv)`
     border-right: 1px lightgray solid;
     border-left: 1px lightgray solid;
     padding: 10px 0px;
-    
 `
+const StyledNav = styled.nav`
+    width:100%;
+    height:35vh;
+    background-color:white;
+    backdrop-filter: drop-shadow(16px 16px 10px black);
 
+    &:first-child, div{
+        width:100%;
+    }
+`
+const Lista = styled(StyledDiv)`
+    width: 100%;
+    flex-direction: column;
+    align-items:start;
+    box-shadow: none;
+    margin:10px 0px;
+    gap:20px;
+`
+const ElementoLista = styled(PDiv)`
+    align-items:center;
+    justify-content: start;
+    gap:10px;
+`
 const Header = () =>{
+    const [mostrarOcultar,setMostrar] = useState(false)
+    const [location,setlocation] = useState("Helsinki")
+    const mostrar = () => {
+        setMostrar(!mostrarOcultar)
+    }
+    const enviarID = (e) => {
+        setlocation(e.target.id) 
+    }
     return(
         <StyledHeader>
-            <StyledLogo src={Logo} alt="logo"/>
+        {
+            mostrarOcultar ?  <StyledNav>
             <StyledDiv>
-                <PDiv>
-                    <StyledSpan>Helsinki, Finland</StyledSpan>
-                </PDiv>
-                <CenterDiv>
-                    <StyledInput type="text" placeholder="Add Guests"/>
-                </CenterDiv>
-                <PDiv>
-                    <StyledButton><SearchIcon/></StyledButton>
-                </PDiv>
-            </StyledDiv>
+            <PDiv>
+                <StyledButton onClick = {mostrar}>{location}, Finland</StyledButton>
+            </PDiv>
+            <CenterDiv>
+                <StyledInput type="text" placeholder="Add Guests"/>
+            </CenterDiv>
+            <PDiv>
+                <StyledButton><SearchIcon/></StyledButton>
+            </PDiv>
+        </StyledDiv>
+        <Lista>
+        {
+            cities.map((city,index) => {
+                return <ElementoLista key={index} ><LocationOnIcon sx={{color:colorResaltado}}/><StyledButton id={city} onClick={enviarID}>{city}, Finland</StyledButton></ElementoLista>
+            })
+        }
+        </Lista>
+        </StyledNav> 
+        :<Fragment>
+        <StyledLogo src={Logo} alt="logo"/>
+        <StyledDiv>
+            <PDiv>
+                <StyledButton onClick = {mostrar}>{location}, Finland</StyledButton>
+            </PDiv>
+            <CenterDiv>
+                <StyledInput type="text" placeholder="Add Guests"/>
+            </CenterDiv>
+            <PDiv>
+                <StyledButton><SearchIcon/></StyledButton>
+            </PDiv>
+        </StyledDiv>
+        </Fragment>       
+
+        }
+       
+
         </StyledHeader>
     )
 }
