@@ -38,11 +38,7 @@ const StyledSpan = styled.p`
 const GraySpan = styled(StyledSpan)`
     color:gray;
 `
-const StyledInput = styled.input`
-    width:60%;
-    border:none;
-    outline:none;
-`
+
 const PDiv = styled.div`
     padding:10px;
     height:100%;
@@ -97,18 +93,35 @@ const Guests = styled.div`
     gap: 15px;
     width:50%;
 `
-const BotonesSR = styled.div`
+const ContenedorBotonesSR = styled.div`
     display:flex;
     align-items:center;
     gap:10px;
+`
 
+const BotonesSR = styled.button`
+    background-color:transparent;
+    border-radius: 100%;
+    font-size:1em;
+    border:none;
+    outline:none;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    width:20px;
+    height:20px;
+    &:hover{
+        border: 1px gray solid;
+    }
 `
 
 const Header = (props) =>{
-    const {location,enviarID} = props
+    const {location,enviarID,counterAdults,setCounterAdults,counterChildren,setCounterChildren} = props
     const [mostrarCities,setMostrarCities] = useState(false)
     const [mostrarGuests,setMostrarGuests] = useState(false)
 
+
+    //Funciones mostrar filtros
     const mostrar = () => {
         setMostrarCities(!mostrarCities)
         setMostrarGuests(false)
@@ -121,6 +134,7 @@ const Header = (props) =>{
         setMostrarGuests(false)
         setMostrarCities(false)
     }
+    
     if(mostrarCities){
         return(<StyledHeader>
                 <StyledNav>
@@ -155,16 +169,46 @@ const Header = (props) =>{
                 <StyledButton onClick = {mostrarG}>Add Guests</StyledButton>
                 </CenterDiv>
                 <PDiv>
-                    <StyledButton><SearchIcon/></StyledButton>
+                <StyledButton onClick={ocultar}><SearchIcon/></StyledButton>
                 </PDiv>
             </NavDiv>
             <Guests>
             <StyledSpan>Adults</StyledSpan>
             <GraySpan>Ages 13 or above</GraySpan>
-            <BotonesSR><button>-</button><span>0</span><button>+</button></BotonesSR>
+            {
+                counterAdults === 0 ? <ContenedorBotonesSR>
+            <BotonesSR id="disminuirA" disabled onClick={()=>{let less = counterAdults -1
+                setCounterAdults(less)}}>-</BotonesSR>
+            <span>{counterAdults}</span>
+            <BotonesSR id="aumentarA" onClick={()=>{let add = counterAdults +1
+                setCounterAdults(add)}}>+</BotonesSR>
+            </ContenedorBotonesSR> : <ContenedorBotonesSR>
+            <BotonesSR id="disminuirA" onClick={()=>{let less = counterAdults -1
+                setCounterAdults(less)}}>-</BotonesSR>
+            <span>{counterAdults}</span>
+            <BotonesSR id="aumentarA" onClick={()=>{let add = counterAdults +1
+                setCounterAdults(add)}}>+</BotonesSR>
+            </ContenedorBotonesSR>
+            }
             <StyledSpan>Children</StyledSpan>
             <GraySpan>Ages 2-12</GraySpan>
-            <BotonesSR><button>-</button><span>0</span><button>+</button></BotonesSR>
+            {
+                counterChildren === 0 ? <ContenedorBotonesSR>
+                <BotonesSR id="disminuirC" disabled onClick={()=>{let less = counterChildren -1
+                    setCounterChildren(less)}}>-</BotonesSR>
+                <span>{counterChildren}</span>
+                <BotonesSR id="aumentarC" onClick={()=>{let add = counterChildren +1
+                    setCounterChildren(add)}}>+</BotonesSR>
+                </ContenedorBotonesSR> :
+                <ContenedorBotonesSR>
+                <BotonesSR id="disminuirC" onClick={()=>{let less = counterChildren -1
+                    setCounterChildren(less)}}>-</BotonesSR>
+                <span>{counterChildren}</span>
+                <BotonesSR id="aumentarC" onClick={()=>{let add = counterChildren +1
+                    setCounterChildren(add)}}>+</BotonesSR>
+            </ContenedorBotonesSR>
+            }
+            
         </Guests>
         </StyledNav>
         </StyledHeader>)
@@ -182,7 +226,7 @@ const Header = (props) =>{
                 <StyledButton onClick = {mostrarG}>Add Guests</StyledButton>
                 </CenterDiv>
                 <PDiv>
-                    <StyledButton><SearchIcon/></StyledButton>
+                <StyledButton onClick={ocultar}><SearchIcon/></StyledButton>
                 </PDiv>
             </StyledDiv>
             </Fragment>       

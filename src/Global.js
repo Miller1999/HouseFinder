@@ -15,6 +15,9 @@ body{
     padding:50px;
     color:black;
 }
+button{
+    cursor:pointer;
+}
 `
 
 export default GlobalStyle

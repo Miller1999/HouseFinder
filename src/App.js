@@ -8,14 +8,16 @@ import { useState } from "react";
 
 function App() {
   const [location,setlocation] = useState("Helsinki")
+  const [counterAdults,setCounterAdults] = useState(0)
+  const [counterChildren,setCounterChildren] = useState(0)
   const enviarID = (e) => {
     setlocation(e.target.id) 
 }
   return (
     <Fragment>
       <GlobalStyle/>
-      <Header location={location} enviarID={enviarID}/>
-      <Container location={location}/>
+      <Header location={location} enviarID={enviarID} counterAdults={counterAdults} setCounterAdults={setCounterAdults} counterChildren={counterChildren} setCounterChildren={setCounterChildren}/>
+      <Container location={location} counterAdults={counterAdults} counterChildren={counterChildren}/>
       <Footer/>
     </Fragment>
   );
