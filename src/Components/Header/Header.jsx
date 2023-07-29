@@ -38,6 +38,11 @@ const StyledSpan = styled.p`
 const GraySpan = styled(StyledSpan)`
     color:gray;
 `
+const StyledInput = styled.input`
+    width:60%;
+    border:none;
+    outline:none;
+`
 const PDiv = styled.div`
     padding:10px;
     height:100%;
@@ -63,7 +68,7 @@ const CenterDiv = styled(PDiv)`
 `
 const StyledNav = styled.nav`
     width:100%;
-    height:35vh;
+    height:45vh;
     background-color:white;
     position:relative;
     border-radius: 20px;
@@ -99,10 +104,11 @@ const BotonesSR = styled.div`
 
 `
 
-const Header = () =>{
+const Header = (props) =>{
+    const {location,enviarID} = props
     const [mostrarCities,setMostrarCities] = useState(false)
     const [mostrarGuests,setMostrarGuests] = useState(false)
-    const [location,setlocation] = useState("Helsinki")
+
     const mostrar = () => {
         setMostrarCities(!mostrarCities)
         setMostrarGuests(false)
@@ -111,8 +117,9 @@ const Header = () =>{
         setMostrarGuests(!mostrarGuests)
         setMostrarCities(false)
     }
-    const enviarID = (e) => {
-        setlocation(e.target.id) 
+    const ocultar = () => {
+        setMostrarGuests(false)
+        setMostrarCities(false)
     }
     if(mostrarCities){
         return(<StyledHeader>
@@ -125,7 +132,7 @@ const Header = () =>{
                 <StyledButton onClick = {mostrarG}>Add Guests</StyledButton>
                 </CenterDiv>
                 <PDiv>
-                    <StyledButton><SearchIcon/></StyledButton>
+                    <StyledButton onClick={ocultar}><SearchIcon/></StyledButton>
                 </PDiv>
             </NavDiv>
             <Lista>

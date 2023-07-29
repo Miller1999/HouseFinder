@@ -23,14 +23,15 @@ const Title = styled.h1`
 
 `
 
-const Container = () =>{
+const Container = (props) =>{
+    const {location}= props
     const [ListHouses, setHouses] = useState([])
     useEffect(()=>{
         findStays(API.baseURL,(response) => {
             setHouses(response)
         })
     },[])
-    const showHouses = ListHouses.filter(house => house.city === "Helsinki")
+    const showHouses = ListHouses.filter(house => house.city === location)
     return(
         <Fragment>
             <StyledDiv>
