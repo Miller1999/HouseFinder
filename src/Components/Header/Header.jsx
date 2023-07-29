@@ -32,7 +32,7 @@ const NavDiv = styled(StyledDiv)`
 `
     
 
-const StyledSpan = styled.p`
+const StyledSpan = styled.span`
     font-size: 16px;
 `
 const GraySpan = styled(StyledSpan)`
@@ -54,7 +54,14 @@ const StyledButton = styled.button`
     background-color: transparent;
     border:none;
     padding:0;
-    cursor:pointer;
+    gap:20px;
+`
+const StyledSearch = styled(StyledButton)`
+    padding:10px 15px;
+    background-color:${colorResaltado};
+    font-size: 1em;
+    color:white;
+    border-radius: 20px;
 `
 const CenterDiv = styled(PDiv)`
     border-right: 1px lightgray solid;
@@ -146,7 +153,7 @@ const Header = (props) =>{
                 <StyledButton onClick = {mostrarG}>Add Guests</StyledButton>
                 </CenterDiv>
                 <PDiv>
-                    <StyledButton onClick={ocultar}><SearchIcon/></StyledButton>
+                    <StyledSearch onClick={ocultar}><SearchIcon sx={{color:"#fff"}}/>Search</StyledSearch>
                 </PDiv>
             </NavDiv>
             <Lista>
@@ -169,7 +176,7 @@ const Header = (props) =>{
                 <StyledButton onClick = {mostrarG}>Add Guests</StyledButton>
                 </CenterDiv>
                 <PDiv>
-                <StyledButton onClick={ocultar}><SearchIcon/></StyledButton>
+                <StyledSearch onClick={ocultar}><SearchIcon sx={{color:"#fff"}}/>Search</StyledSearch>
                 </PDiv>
             </NavDiv>
             <Guests>
@@ -226,7 +233,7 @@ const Header = (props) =>{
                 <StyledButton onClick = {mostrarG}>Add Guests</StyledButton>
                 </CenterDiv>
                 <PDiv>
-                <StyledButton onClick={ocultar}><SearchIcon/></StyledButton>
+                <StyledButton onClick={ocultar}><SearchIcon sx={{color:colorResaltado}}/></StyledButton>
                 </PDiv>
             </StyledDiv>
             </Fragment>       

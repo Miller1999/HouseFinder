@@ -8,6 +8,7 @@ export const colorResaltado = "#eb5757"
 const GlobalStyle = createGlobalStyle`
 *{
     box-sizing: border-box;
+    font-family: "Raleway";
 }
 body{
     font-family: "Raleway";

@@ -16,7 +16,7 @@ function App() {
   return (
     <Fragment>
       <GlobalStyle/>
-      <Header location={location} enviarID={enviarID} counterAdults={counterAdults} setCounterAdults={setCounterAdults} counterChildren={counterChildren} setCounterChildren={setCounterChildren}/>
+      <Header location={location} enviarID={enviarID} counterAdults={counterAdults} setCounterAdults={setCounterAdults} counterChildren={counterChildren} setCounterChildren={setCounterChildren} />
       <Container location={location} counterAdults={counterAdults} counterChildren={counterChildren}/>
       <Footer/>
     </Fragment>

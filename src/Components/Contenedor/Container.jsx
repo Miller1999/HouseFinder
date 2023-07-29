@@ -24,19 +24,21 @@ const Title = styled.h1`
 `
 
 const Container = (props) =>{
-    const {location}= props
+    const {location,counterAdults,counterChildren}= props
+    let maxGuests = counterAdults + counterChildren
     const [ListHouses, setHouses] = useState([])
     useEffect(()=>{
         findStays(API.baseURL,(response) => {
             setHouses(response)
         })
     },[])
-    const showHouses = ListHouses.filter(house => house.city === location)
+    
+    const showHouses = ListHouses.filter(house => house.city === location && house.maxGuests >= maxGuests)
     return(
         <Fragment>
             <StyledDiv>
                 <Title>Stays in Finland</Title>
-                <span>{ListHouses.length} stays</span>
+                <span>{showHouses.length} stays</span>
             </StyledDiv>
             <StyledContainer>
                 {showHouses.map((house) => {
